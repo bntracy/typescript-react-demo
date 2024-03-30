@@ -77,10 +77,16 @@ const App: FC<AppProps> = ({ title }) => {
     let length = spiritCopy.length;
     let randomIndex = Math.floor(Math.random() * length);
     setSpiritOne(spiritCopy[randomIndex]);
+    spiritCopy.splice(randomIndex, 1);
+    length--;
     randomIndex = Math.floor(Math.random() * length);
     setSpiritTwo(spiritCopy[randomIndex]);
+    spiritCopy.splice(randomIndex, 1);
+    length--;
     randomIndex = Math.floor(Math.random() * length);
     setSpiritThree(spiritCopy[randomIndex]);
+    spiritCopy.splice(randomIndex, 1);
+    length--;
     randomIndex = Math.floor(Math.random() * length);
     setSpiritFour(spiritCopy[randomIndex]);
   }
