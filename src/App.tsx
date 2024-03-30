@@ -1,34 +1,19 @@
-import axios from 'axios';
-import { FC, useEffect, useState } from 'react';
-import { AppProps, Users } from './App.types';
-import User from './components/User';
+import { FC } from 'react';
+import { AppProps, Spirit } from './App.types';
+import SpiritList from './components/SpiritList';
 
 const App: FC<AppProps> = ({ title }) => {
-  const [users, setUsers] = useState<Users[]>([]);
+  const spirits: Spirit[] = [];
+  spirits.push({name: 'Lightning\'s Swift Strike', aspects: ['(no aspect)', 'Immense', 'Pandemonium', 'Sparking', 'Wind']});
+  spirits.push({name: 'River Surges in Sunlight', aspects: ['(no aspect)', 'Haven', 'Sunshine', 'Travel']});
+  spirits.push({name: 'Shadows Flicker Like Flame', aspects: ['(no aspect)', 'Amorphous', 'Dark Fire', 'Foreboding', 'Madness', 'Reach']});
+  spirits.push({name: 'Vital Strength of the Earth', aspects: ['(no aspect)', 'Might', 'Nourishing', 'Resilience']});
+  console.log(spirits);
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const { data } = await axios.get(
-          'https://randomuser.me/api/?results=10'
-        );
-        console.log(data);
-        setUsers(data.results);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUsers();
-  }, []);
-  
   return (
     <div>
         <h1>{title}</h1>
-        <ul>
-          {users.map(({ login, name, email }) => {
-            return <User key={login.uuid} name={name} email={email} />;
-          })}
-        </ul>
+        <SpiritList spirits={spirits} />
     </div>
   );
 };
