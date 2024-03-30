@@ -94,10 +94,11 @@ const App: FC<AppProps> = ({ title }) => {
   const displayFourSpirits = () => {
     if (spiritOne && spiritTwo && spiritThree && spiritFour) {
       return <ul>
-        <li>{spiritOne.name}</li>
-        <li>{spiritTwo.name}</li>
-        <li>{spiritThree.name}</li>
-        <li>{spiritFour.name}</li>
+        {/* if the spirit has aspects, display a random aspect */}
+        <li>{spiritOne.name}{(spiritOne.aspects.length > 0) && <>: {spiritOne.aspects[Math.floor(Math.random() * spiritOne.aspects.length)]}</>}</li>
+        <li>{spiritTwo.name}{(spiritTwo.aspects.length > 0) && <>: {spiritTwo.aspects[Math.floor(Math.random() * spiritTwo.aspects.length)]}</>}</li>
+        <li>{spiritThree.name}{(spiritThree.aspects.length > 0) && <>: {spiritThree.aspects[Math.floor(Math.random() * spiritThree.aspects.length)]}</>}</li>
+        <li>{spiritFour.name}{(spiritFour.aspects.length > 0) && <>: {spiritFour.aspects[Math.floor(Math.random() * spiritFour.aspects.length)]}</>}</li>
       </ul>
     } else {
       return <div>Click the button for four random spirits!</div>;
