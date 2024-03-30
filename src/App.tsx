@@ -5,6 +5,10 @@ import SpiritList from './components/SpiritList';
 const App: FC<AppProps> = ({ title }) => {
   const [randomSpirit, setRandomSpirit] = useState<Spirit | null>(null);
   const [randomAspect, setRandomAspect] = useState<string | null>(null);
+  const [spiritOne, setSpiritOne] = useState<Spirit | null>(null);
+  const [spiritTwo, setSpiritTwo] = useState<Spirit | null>(null);
+  const [spiritThree, setSpiritThree] = useState<Spirit | null>(null);
+  const [spiritFour, setSpiritFour] = useState<Spirit | null>(null);
 
   const spirits: Spirit[] = [];
   spirits.push({name: 'Lightning\'s Swift Strike', aspects: ['(no aspect)', 'Immense', 'Pandemonium', 'Sparking', 'Wind']});
@@ -44,7 +48,6 @@ const App: FC<AppProps> = ({ title }) => {
   spirits.push({name: 'Wandering Voice Keens Delirium', aspects:[]});
   spirits.push({name: 'Wounded Waters Bleeding', aspects:[]});
   spirits.push({name: 'Dances Up Earthquakes', aspects:[]});
-  console.log(spirits);
 
   const randomizeSpirit = () => {
     const length = spirits.length;
@@ -65,7 +68,33 @@ const App: FC<AppProps> = ({ title }) => {
     } else if (randomSpirit) {
       return <div>{randomSpirit.name}</div>;
     } else {
-      return <div>Click the button!</div>;
+      return <div>Click the button for a random spirit!</div>;
+    }
+  }
+
+  const fourRandomSpirits = () => {
+    const spiritCopy = [...spirits];
+    let length = spiritCopy.length;
+    let randomIndex = Math.floor(Math.random() * length);
+    setSpiritOne(spiritCopy[randomIndex]);
+    randomIndex = Math.floor(Math.random() * length);
+    setSpiritTwo(spiritCopy[randomIndex]);
+    randomIndex = Math.floor(Math.random() * length);
+    setSpiritThree(spiritCopy[randomIndex]);
+    randomIndex = Math.floor(Math.random() * length);
+    setSpiritFour(spiritCopy[randomIndex]);
+  }
+
+  const displayFourSpirits = () => {
+    if (spiritOne && spiritTwo && spiritThree && spiritFour) {
+      return <ul>
+        <li>{spiritOne.name}</li>
+        <li>{spiritTwo.name}</li>
+        <li>{spiritThree.name}</li>
+        <li>{spiritFour.name}</li>
+      </ul>
+    } else {
+      return <div>Click the button for four random spirits!</div>;
     }
   }
 
@@ -75,6 +104,8 @@ const App: FC<AppProps> = ({ title }) => {
         <SpiritList spirits={spirits} />
         <button type="button" onClick={randomizeSpirit}>Random Spirit</button>
         {displayRandomSpirit()}
+        <button type="button" onClick={fourRandomSpirits}>Gain a Spirit</button>
+        {displayFourSpirits()}
     </div>
   );
 };
