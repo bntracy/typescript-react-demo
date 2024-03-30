@@ -4,6 +4,7 @@ import SpiritList from './components/SpiritList';
 
 const App: FC<AppProps> = ({ title }) => {
   const [randomSpirit, setRandomSpirit] = useState<Spirit | null>(null);
+  const [randomAspect, setRandomAspect] = useState<string | null>(null);
 
   const spirits: Spirit[] = [];
   spirits.push({name: 'Lightning\'s Swift Strike', aspects: ['(no aspect)', 'Immense', 'Pandemonium', 'Sparking', 'Wind']});
@@ -16,6 +17,9 @@ const App: FC<AppProps> = ({ title }) => {
     const length = spirits.length;
     const randomIndex = Math.floor(Math.random() * length); // returns a random number between 0 and length-1 inclusive
     setRandomSpirit(spirits[randomIndex]);
+    const aspectLength = spirits[randomIndex].aspects.length;
+    const randomAspectIndex = Math.floor(Math.random() * aspectLength);
+    setRandomAspect(spirits[randomIndex].aspects[randomAspectIndex]);
   }
 
   return (
@@ -23,7 +27,7 @@ const App: FC<AppProps> = ({ title }) => {
         <h1>{title}</h1>
         <SpiritList spirits={spirits} />
         <button type="button" onClick={randomizeSpirit}>Random Spirit</button>
-        {randomSpirit && <div>{randomSpirit.name}</div>}
+        {randomSpirit && <div>{randomSpirit.name}: {randomAspect}</div>}
     </div>
   );
 };
