@@ -5,4 +5,5 @@ export interface AppProps {
 export interface Spirit {
     name: string;
     aspects: string[];
+    checked: boolean;
 }

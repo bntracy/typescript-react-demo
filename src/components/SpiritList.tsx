@@ -3,12 +3,16 @@ import { Spirit } from '../App.types';
 
 interface SpiritListProps {
     spirits: Spirit[];
+    checkedState: boolean[];
+    handleOnChange: Function;
 }
 
-const SpiritList: FC<SpiritListProps> = ({ spirits }) => {
+
+const SpiritList: FC<SpiritListProps> = ({ spirits, checkedState, handleOnChange }) => {
+
     return (
         <ul>
-            {spirits.map(spirit => <li key={spirit.name}>{spirit.name}</li>)}
+            {spirits.map((spirit, index) => <li key={spirit.name}><input type="checkbox" checked={checkedState[index]} onChange={()=>handleOnChange(index)}/>{spirit.name}</li>)}
         </ul>
     );
 }
