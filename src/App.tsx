@@ -69,6 +69,10 @@ const App: FC<AppProps> = ({ title }) => {
     updateSpiritList();
     const spiritCopy = spirits.filter(spirit => spirit.checked);
     const length = spiritCopy.length;
+    if (length === 0) {
+      alert("Please select at least one spirit");
+      return;
+    }
     const randomIndex = Math.floor(Math.random() * length); // returns a random number between 0 and length-1 inclusive
     setRandomSpirit(spiritCopy[randomIndex]);
     const aspectLength = spiritCopy[randomIndex].aspects.length;
@@ -91,8 +95,13 @@ const App: FC<AppProps> = ({ title }) => {
   }
 
   const fourRandomSpirits = () => {
-    const spiritCopy = [...spirits];
+    updateSpiritList();
+    const spiritCopy = spirits.filter(spirit => spirit.checked);
     let length = spiritCopy.length;
+    if (length < 4) {
+      alert('Please select at least four spirits');
+      return;
+    }
     let randomIndex = Math.floor(Math.random() * length);
     setSpiritOne(spiritCopy[randomIndex]);
     spiritCopy.splice(randomIndex, 1);
